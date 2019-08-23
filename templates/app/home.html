@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">  
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Fluid jumbotron</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+      </div>
+    </div>
+    <div class="row" style="margin-top:50px">      
+      <div class="col-md-4">
+        <section class="login-card">
+            <div class="d-flex justify-content-between">                   
+              <img src="https://img.icons8.com/bubbles/100/000000/settings.png">
+              <div class="text-right text-secondary">
+                    <h5>Sales</h5>
+                    <h3>$135,000</h3>
+              </div>
+            </div>   
+        </section>   
+      </div>
+        <div class="col-md-4">
+               <section class="login-card">
+            <div class="d-flex justify-content-between">                   
+             <img src="https://img.icons8.com/bubbles/100/000000/settings.png">
+               <div class="text-right text-secondary">
+                    <h5>Sales</h5>
+                    <h3>$135,000</h3>
+                </div>
+                </div>   
+            </section>   
+         </div>
+        <div class="col-md-4">
+           <section class="login-card">
+            <div class="d-flex justify-content-between">                   
+             <img src="https://img.icons8.com/bubbles/100/000000/settings.png">
+               <div class="text-right text-secondary">
+                    <h5>Sales</h5>
+                    <h3>$135,000</h3>
+                </div>
+                </div>   
+            </section>   
+         </div>
+    </div>
+    
+    <div class="card" style="margin-top:50px">
+          <div class="d-flex justify-content-center">  
+            <div class="row">
+               {% for artigo in artigos %}
+               <div class="col-md-4">
+                  <div class="notes">
+                    <small>{{artigo.artigos_date}}</small>
+                    <h4>{{artigo.titulo_text}}</h4>                  
+                    <p>{{artigo.descricao_text}}</p>               
+                    <a href="#"><i class="fa fa-trash-o "></i></a>
+                   </div>
+               </div>
+                 {% endfor %}
+            </div>
+           </div>    
+                   <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+          Open modal
+        </button>         
+    </div>  
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+        {% if artigos.has_previous %}      
+    <li class="page-item">
+      <a class="page-link" href="?page=1">&laquo; first</a>
+    </li>
+     <li class="page-item">
+       <a class="page-link" href="?page={{ artigos.previous_page_number }}">previous</a>
+    </li> 
+       {% endif %}
+      <span class="current page-link">
+            Pagina {{ artigos.number }} de {{ artigos.paginator.num_pages }}.
+        </span>
+     {% if artigos.has_next %}
+     <li class="page-item">
+       <a class="page-link" href="?page={{ artigos.next_page_number }}">next</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="?page={{ artigos.paginator.num_pages }}">last &raquo;</a>
+    </li> 
+       {% endif %}
+  </ul>
+</nav>  
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">  
+        <form action="/notes/" method="post">    
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Novo artigo</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+              
+          {% csrf_token %} 
+          {{ form }}          
+       
+      </div>
+      
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form> 
+    </div>
+  </div>
+</div>
+<!-- The Modal -->
+</div>
+{% endblock %}    
