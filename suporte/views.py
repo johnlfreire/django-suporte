@@ -64,11 +64,16 @@ class TicketCreate(CreateView):
     
     #chamados_date = datetime.datetime.now()
     form_class = TicketForm 
+    initial = {'chamados_date': datetime.datetime.now()}
+    print(CreateView)
+    
     template_name = 'suporte/ticket/tickets_create.html'
-    success_url = '/tickets'
+    #success_url = '/tickets'
     #fields = '__all__'
     #model = Ticket    
-    initial = {'chamados_date': datetime.datetime.now()}
+    
+    
+    
     #fields = ('titulo_text','descricao_text','prioridade_text','departamento_text','autor_text','chamados_date')
     #form_class = TicketForm    
    # chamados_date = datetime.datetime.now()
