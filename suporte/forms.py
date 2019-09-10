@@ -15,14 +15,24 @@ class LoginForm(forms.Form):
 
 class ArtigosForm(forms.Form):
         
-     titulo = forms.CharField(
+    titulo = forms.CharField(
          max_length=255,
          widget=forms.TextInput(attrs={'class': 'form-control'})
      )    
-     descricao = forms.CharField(
+    descricao = forms.CharField(
          max_length=255,
          widget=forms.Textarea(attrs={'class': 'form-control','rows':'5'})
      )
+class TicketSimpleForm(forms.Form):
+        
+    ticket_id = forms.CharField(
+         max_length=255,
+         widget=forms.TextInput(attrs={'class': 'form-control'})
+     )    
+    email = forms.CharField(
+         max_length=255,
+         widget=forms.Textarea(attrs={'class': 'form-control','rows':'5'})
+     )        
 class TicketForm(forms.ModelForm):
     titulo_text = forms.CharField(
          max_length=255,

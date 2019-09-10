@@ -65,7 +65,6 @@ class TicketCreate(CreateView):
     #chamados_date = datetime.datetime.now()
     form_class = TicketForm 
     initial = {'chamados_date': datetime.datetime.now()}
-    print(CreateView)
     
     template_name = 'suporte/ticket/tickets_create.html'
     #success_url = '/tickets'
@@ -81,12 +80,29 @@ class TicketCreate(CreateView):
      #   new_item = form.save(commit=False)
       #  return super().form_valid(form)
     
+
+    
+def TicketForm(request):
+     #if request.method == 'POST':
+    try:
+        ar = Ticket.objects.filter(ticket_id='ac6205329a9c').filter(pk=24)
+        print(ar)  
+    except Ticket.DoesNotExist:
+        print('ERROOO')
+    return redirect('/home/')
+
+def TicketQuery(request):
+     #if request.method == 'POST':
+    try:
+        ar = Ticket.objects.filter(ticket_id='ac6205329a9c').filter(pk=24)
+        print(ar)  
+    except Ticket.DoesNotExist:
+        print('ERROOO')
+    return redirect('/home/')
 class TicketList(ListView): 
     template_name = 'suporte/ticket/tickets_list.html'
     model = Ticket
-    form_class = TicketForm    
-
-
+    form_class = TicketForm 
 class TicketDetail(DetailView): 
     template_name = 'suporte/ticket/tickets_detail.html'
     model = Ticket    

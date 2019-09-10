@@ -24,6 +24,7 @@ class Ticket(models.Model):
     departamento_text = models.CharField(max_length=200,choices=CRC_CHOICES)
     autor_text = models.CharField(max_length=200)
     ticket_id = models.CharField(max_length=255, blank=True)
+    email = models.CharField(max_length=200)
     chamados_date = models.DateTimeField('date published')
     def get_absolute_url(self):
         return reverse('tickets_detail', kwargs={'pk': self.pk})

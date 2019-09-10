@@ -16,8 +16,8 @@
 <td>{{ ticket.titulo_text }}</td>
 <td>{{ ticket.chamados_date }}</td>   
 <td>
-<a  href="{% url "tickets_detail" ticket.id  %}">details</a>
-<a  href="{% url "tickets_update"  ticket.id  %}">edit</a>
+<a class="btn btn-primary" href="{% url "tickets_detail" ticket.id  %}">details</a>
+<a class="btn btn-primary" href="{% url "tickets_update"  ticket.id  %}">edit</a>
 <a  href="{% url "tickets_delete"  ticket.id  %}">delete</a>
 </td>
 </tr>
