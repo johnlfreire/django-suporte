@@ -21,7 +21,7 @@ class ArtigosForm(forms.Form):
      )    
     descricao = forms.CharField(
          max_length=255,
-         widget=forms.Textarea(attrs={'class': 'form-control','rows':'5'})
+         widget=forms.Textarea(attrs={'class': 'form-control ','rows':'5'})
      )
 class TicketSimpleForm(forms.Form):
         
@@ -31,8 +31,8 @@ class TicketSimpleForm(forms.Form):
      )    
     email = forms.CharField(
          max_length=255,
-         widget=forms.Textarea(attrs={'class': 'form-control','rows':'5'})
-     )        
+         widget=forms.TextInput(attrs={'class': 'form-control'})
+     )    
 class TicketForm(forms.ModelForm):
     titulo_text = forms.CharField(
          max_length=255,

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
-from .forms import LoginForm, ArtigosForm, TicketForm
+from .forms import LoginForm, ArtigosForm, TicketForm,TicketSimpleForm
 from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
@@ -82,14 +82,15 @@ class TicketCreate(CreateView):
     
 
     
-def TicketForm(request):
+def ticketForm(request):
      #if request.method == 'POST':
-    try:
-        ar = Ticket.objects.filter(ticket_id='ac6205329a9c').filter(pk=24)
-        print(ar)  
-    except Ticket.DoesNotExist:
-        print('ERROOO')
-    return redirect('/home/')
+    #try:
+     #   ar = Ticket.objects.filter(ticket_id='ac6205329a9c').filter(pk=24)
+       
+    #except Ticket.DoesNotExist:
+     #   print('ERROOO')
+    form = TicketSimpleForm()
+    return render(request, 'suporte/ticket/tickets_user_form.html',{'form':form})  
 
 def TicketQuery(request):
      #if request.method == 'POST':
