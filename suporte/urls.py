@@ -7,6 +7,7 @@ urlpatterns = [
     path('notes/', views.notes),
     path('logout/', views.logout),
     path('query/', views.TicketQuery),
+    path('form/', views.ticketForm),    
     path('tickets/create/', views.TicketCreate.as_view(), name='tickets_create'),
     path('tickets/', views.TicketList.as_view(), name='tickets_list'),
     path('tickets/<int:pk>', views.TicketDetail.as_view(), name='tickets_detail'),

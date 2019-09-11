@@ -21,7 +21,7 @@ class ArtigosForm(forms.Form):
      )    
     descricao = forms.CharField(
          max_length=255,
-         widget=forms.Textarea(attrs={'class': 'form-control','rows':'5'})
+         widget=forms.Textarea(attrs={'class': 'form-control ','rows':'5'})
      )
 class TicketSimpleForm(forms.Form):
         
@@ -31,8 +31,8 @@ class TicketSimpleForm(forms.Form):
      )    
     email = forms.CharField(
          max_length=255,
-         widget=forms.Textarea(attrs={'class': 'form-control','rows':'5'})
-     )        
+         widget=forms.TextInput(attrs={'class': 'form-control'})
+     )    
 class TicketForm(forms.ModelForm):
     titulo_text = forms.CharField(
          max_length=255,
@@ -48,7 +48,7 @@ class TicketForm(forms.ModelForm):
      )
     prioridade_text = forms.CharField(
          max_length=255,
-         widget=forms.TextInput(attrs={'class': 'form-control'}), 
+         widget=forms.TextInput(attrs={'class': 'form-control'}),
          label="Prioridade"
      )    
     departamento_text = forms.ChoiceField(         
@@ -64,9 +64,13 @@ class TicketForm(forms.ModelForm):
      )
     chamados_date = forms.CharField(
          max_length=255,
-         widget=forms.HiddenInput(attrs={'class': 'form-control'}), 
+         widget=forms.TextInput(attrs={'class': 'form-control'}),
          label="Data"
-     )    
+     )
+    email = forms.CharField(
+         max_length=255,
+         widget=forms.TextInput(attrs={'class': 'form-control'})
+     )  
     class Meta:
       model = Ticket
       widgets = {'chamados_date': forms.HiddenInput()}
