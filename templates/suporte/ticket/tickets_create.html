@@ -1,9 +1,8 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container">  
-<div class="justify-content-center" style="margin:auto">
-<h1>Contact Update</h1>
+<div class="conteiner-form">
+ <h1 class="title">Resumo do Chamado</h1>
 
 <form  method="post">
 {% csrf_token %}
@@ -11,5 +10,5 @@
 <input  type="submit"  value="Submit"  />
 </form>
 </div>
-</div>
+
 {% endblock %}

@@ -1,15 +1,15 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
-from .forms import LoginForm, ArtigosForm, TicketForm,TicketSimpleForm
+from .forms import LoginForm, ArtigosForm, TicketForm,TicketSimpleForm,ResumTicketForm
 from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
-from .models import Artigos, Ticket
+from .models import Artigos, Ticket,Dialogo
 from django.views.generic import ListView, DetailView,CreateView
 from django.views.generic.edit import  UpdateView, DeleteView,FormView
 from django.urls import reverse_lazy
 import datetime
-
+from django.utils.translation import gettext_lazy as _
 def login(request):
     form = LoginForm()
     if request.method == 'GET':
@@ -41,7 +41,12 @@ def home(request):
 #    model = Artigos
 #    fields = ['titulo_text', 'descricao_text']
 #    sucess_url = ''
-    
+def teste(request):
+    print(request.POST['area2']) 
+    print(request.POST['file']) 
+    return redirect('/home/')     
+         
+
 def notes(request):  
     if request.method == 'GET':
         return redirect('/home/')
@@ -63,10 +68,11 @@ def logout(request):
 class TicketCreate(CreateView): 
     
     #chamados_date = datetime.datetime.now()
-    form_class = TicketForm 
+    form_class = ResumTicketForm 
     initial = {'chamados_date': datetime.datetime.now()}
     
     template_name = 'suporte/ticket/tickets_create.html'
+    
     #success_url = '/tickets'
     #fields = '__all__'
     #model = Ticket    
@@ -105,19 +111,25 @@ class TicketList(ListView):
     model = Ticket
     form_class = TicketForm 
 class TicketDetail(DetailView): 
+    artigos = Artigos.objects.all()
+    #template_name =('suporte/ticket/tickets_detail.html',{'artigos'artigos})
     template_name = 'suporte/ticket/tickets_detail.html'
     model = Ticket    
     form_class = TicketForm
+    def get_context_data(self, **kwargs):
+        context = super(TicketDetail, self).get_context_data(**kwargs)
+        context['dialogo'] = Dialogo.objects.filter(ticket_id=32)
+        return context
+
 class TicketUpdate(UpdateView): 
     template_name = 'suporte/ticket/tickets_form.html'
     model = Ticket 
-    #fields = ('titulo_text','descricao_text','prioridade_text','departamento_text','autor_text','chamados_date')
     form_class = TicketForm
-    exclude = ('Prioridade')
-    print(TicketForm)
-    
-    chamados_date = datetime.datetime.now()
+    print()    
+    #chamados_date = datetime.datetime.now()
     success_url = reverse_lazy('tickets_list')
+
+
 class TicketDelete(DeleteView):
     template_name = 'suporte/ticket/tickets_confirm_delete.html'
     model = Ticket

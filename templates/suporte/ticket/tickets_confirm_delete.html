@@ -1,5 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="conteiner-form">
+    <h1 class="title">Resumo do Chamado</h1>
 <h1>Book Delete</h1>
 <form method="post">{% csrf_token %}
     Are you sure you want to delete "{{ object }}" ?
     <input type="submit" value="Submit" />
 </form>
+</div>
+{% endblock %}

@@ -1,29 +1,33 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h1>Contacts</h1>
+<div class="conteiner-form">
+ <h1 class="title">Resumo do Chamado</h1>
 
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Email</th>
-</tr>
-</thead>
-<tbody>
-{% for ticket in object_list %}
-<tr>   
-<td>{{ ticket.titulo_text }}</td>
+<table class="table w3-animate-right" style="margin: auto;">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Numero Ticket</th>
+      <th scope="col">Autor</th>
+      <th scope="col">Prioridade</th>
+      <th scope="col">Departamento</th>
+      <th scope="col">Data Solicitação</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for ticket in object_list %}      
+    <tr>
+      <th scope="row">{{ ticket.titulo_text }}</th>
+      <td>{{ ticket.titulo_text }}</td>
 <td>{{ ticket.chamados_date }}</td>   
-<td>
-<a class="btn btn-primary" href="{% url "tickets_detail" ticket.id  %}">details</a>
-<a class="btn btn-primary" href="{% url "tickets_update"  ticket.id  %}">edit</a>
-<a  href="{% url "tickets_delete"  ticket.id  %}">delete</a>
-</td>
-</tr>
-
-{% endfor %}
-</tbody>
+        <td>{{ ticket.titulo_text }}</td>
+<td>{{ ticket.chamados_date }}</td>   
+ <td><a class="btn btn-primary float-right" href="{% url "tickets_detail" ticket.id  %}">details</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
- 
+</div>
 {% endblock %}
+

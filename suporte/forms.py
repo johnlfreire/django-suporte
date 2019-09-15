@@ -29,7 +29,7 @@ class TicketSimpleForm(forms.Form):
          max_length=255,
          widget=forms.TextInput(attrs={'class': 'form-control'})
      )    
-    email = forms.CharField(
+    ticket_email = forms.CharField(
          max_length=255,
          widget=forms.TextInput(attrs={'class': 'form-control'})
      )    
@@ -62,17 +62,50 @@ class TicketForm(forms.ModelForm):
          widget=forms.TextInput(attrs={'class': 'form-control'}), 
          label="Autor"
      )
-    chamados_date = forms.CharField(
+    chamados_date = forms.DateField(
+        widget=forms.widgets.DateInput(format="%m/%d/%Y",attrs={'class': 'form-control'})
+    )        
+    ticket_id = forms.CharField(
          max_length=255,
-         widget=forms.TextInput(attrs={'class': 'form-control'}),
-         label="Data"
+         widget=forms.TextInput(attrs={'class': 'form-control','disabled':''}),
+         required=False
+    
      )
-    email = forms.CharField(
-         max_length=255,
-         widget=forms.TextInput(attrs={'class': 'form-control'})
-     )  
+    ticket_email = forms.EmailField(
+    widget=forms.EmailInput(attrs={'class': 'form-control'})
+    ) 
+    
     class Meta:
       model = Ticket
-      widgets = {'chamados_date': forms.HiddenInput()}
-      fields = ('titulo_text','descricao_text','prioridade_text','departamento_text','autor_text','chamados_date')
+      fields = ('titulo_text','ticket_id','descricao_text','departamento_text','autor_text','ticket_email','chamados_date','prioridade_text')
+
+class ResumTicketForm(forms.ModelForm):
+    class Meta:
+      model = Ticket      
+      fields = ('titulo_text','descricao_text','autor_text','ticket_email','departamento_text','chamados_date')
+      widgets = {
+            'titulo_text':forms.TextInput(attrs={'class': 'form-control'}),
+            'descricao_text':forms.Textarea(attrs={'class': 'form-control','rows':'5'}),
+            'autor_text':forms.TextInput(attrs={'class': 'form-control'}),
+            'ticket_email':forms.EmailInput(attrs={'class': 'form-control'}),
+            'departamento_text':forms.Select(attrs={'class': 'form-control'}),
+            'chamados_date':forms.HiddenInput(attrs={'class': 'form-control'})
+        }
+      labels = {
+          'titulo_text':('Titulo'),
+          'descricao_text':('Descrição'),
+          'autor_text':('Nome'),
+          'ticket_email':('Email'),
+          'departamento_text':('Departamento'),
+          'chamados_date':('Data'),
+      }
+        #help_texts = {
+         #   'name': _('Some useful help text.'),
+        #}
+        #error_messages = {
+         #   'name': {
+          #      'max_length': _("This writer's name is too long."),
+           # },
+        #}
+      #fields = '__all__'
     
