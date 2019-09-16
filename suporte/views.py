@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
+<<<<<<< HEAD
 from .forms import LoginForm, ArtigosForm, TicketForm,TicketSimpleForm,ResumTicketForm
+=======
+from .forms import LoginForm, ArtigosForm, TicketForm,TicketSimpleForm
+>>>>>>> 7b39512b683580ce09ea79cfa53c7606dd3a81ec
 from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
